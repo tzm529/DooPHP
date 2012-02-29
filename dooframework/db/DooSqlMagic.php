@@ -59,8 +59,8 @@ class DooSqlMagic {
     protected $map;
     protected $dbconfig;
     protected $dbconfig_list;
-    protected $pdo;
-	protected $attemptAutoReconnect = false;
+    public $pdo;
+	 protected $attemptAutoReconnect = false;
 
     protected $transactionLevel = 0;
 
