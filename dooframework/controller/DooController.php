@@ -107,6 +107,11 @@ class DooController {
     protected $_load;
     protected $_view;
 
+	 /**
+	  * 保存模板变量的临时数组
+	  */
+	 protected $_data = array();
+
     /**
      * Use initPutVars() instead
      * @deprecated deprecated since version 1.3
@@ -633,6 +638,75 @@ class DooController {
 		if ($name == 'renderLayout') {
 			throw new Exception('renderLayout is no longer supported by DooController. Please use $this->view()->renderLayout instead');
 		}
+	}
+
+	/**
+	 * 设置变量到模板数组中(兼容smarty的写法)
+	 */
+	protected function assign($key, $val)
+	{
+		$this->_data[$key] = $val;
+	}
+
+	/**
+	 * 赞同于render方法(兼容smarty的写法)
+	 */
+	protected function display($file)
+	{
+		$this->render($file, $this->_data);
+	}
+
+	/**
+	 * 跳转到指定地址
+	 */
+	protected function tourl($url = null)
+	{
+		if(empty($url))
+			$url = Doo::conf()->APP_URL;
+		echo "<script>window.location='{$url}';</script>";
+		exit;
+	}
+
+	/**
+	 * 弹出提示消息
+	 */
+	protected function alert($msg, $url=null)
+	{
+        header('Content-Type:text/html; charset=utf-8');
+		if(empty($url))
+			$url = Doo::conf()->APP_URL;
+		header("Content-type:text/html; charset=utf-8");
+		echo "<script>alert('{$msg}');window.location='{$url}';</script>";
+		exit;
+	}
+
+	/**
+	 *	弹出提示，并返回到上一页
+	 */
+	protected function back($msg)
+	{
+		$str ="<script type='text/javascript'>alert('{$msg}');history.go(-1);</script>";	
+		header("Content-type:text/html; charset=utf-8");
+		echo $str;
+		exit;
+	}
+
+	/**
+	 * 提取url中的参数
+	 */
+	protected function param($key, $flag = false)
+	{
+		return $flag ? $this->params[$key] : htmlspecialchars($this->params[$key]); 
+	}
+
+	/**
+	 * 提取post中的参数
+	 */
+	protected function post($key, $flag = false)
+	{
+		if(!isset($_POST[$key]))
+			return '';
+		return $flag ? $_POST[$key] : htmlspecialchars($_POST[$key]); 
 	}
 
 }
