@@ -201,7 +201,9 @@ class DooConfig{
      * @var string
      */
     public $APP_NAMESPACE_ID;
-	
+
+	 public $DEBUG_SMARTY = null;
+
     /**
      * Set the configurations. SITE_PATH, BASE_PATH and APP_URL is required
      * @param array $confArr associative array of the configs.
@@ -222,6 +224,9 @@ class DooConfig{
 
 		if ($this->TEMPLATE_ENGINE===null)
 			$this->TEMPLATE_ENGINE='DooView';
+
+		if($this->DEBUG_SMARTY === null)
+			$this->DEBUG_SMARTY = false;
         
     }
 

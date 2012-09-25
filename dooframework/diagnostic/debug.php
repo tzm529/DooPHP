@@ -66,6 +66,9 @@ function setExceptionHandler($e){
 }
 
 function setErrorHandler($errno, $errstr, $errfile, $errline, $errcontext=null){
+	 //如果函数使用了@来屏蔽错误，则error_reporting()会返回0
+	 if(error_reporting() == 0)
+		return;
     Doo::loadHelper('DooTextHelper');
 	
 	//require

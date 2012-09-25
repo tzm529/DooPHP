@@ -20,6 +20,9 @@ $config['BASE_PATH'] = realpath('..').'/dooframework/';
 
 //for production mode use 'prod'
 $config['APP_MODE'] = 'dev';
+$config['DEBUG_SMARTY'] = false;
+// DooView or DooViewSmarty(default: Dooview)
+$config['TEMPLATE_ENGINE'] = 'DooViewSmarty';
 
 //----------------- optional, if not defined, default settings are optimized for production mode ----------------
 //if your root directory is /var/www/ and you place this in a subfolder eg. 'app', define SUBFOLDER = '/app/'

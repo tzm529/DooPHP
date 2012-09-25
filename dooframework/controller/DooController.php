@@ -112,6 +112,11 @@ class DooController {
 	  */
 	 protected $_data = array();
 
+	 /**
+	  * Smarty Object
+	 **/
+	 protected $_smarty = null;
+
     /**
      * Use initPutVars() instead
      * @deprecated deprecated since version 1.3
@@ -640,12 +645,22 @@ class DooController {
 		}
 	}
 
+	public function smarty()
+	{
+		if($this->_smarty == null){
+			Doo::loadCore('view/' . 'DooViewSmarty');
+			$this->_smarty = new DooViewSmarty();
+		}
+		return $this->_smarty;
+	}
+
 	/**
 	 * 设置变量到模板数组中(兼容smarty的写法)
 	 */
 	protected function assign($key, $val)
 	{
 		$this->_data[$key] = $val;
+		//$this->smarty()->assign($key, $val);
 	}
 
 	/**
@@ -654,6 +669,12 @@ class DooController {
 	protected function display($file)
 	{
 		$this->render($file, $this->_data);
+		//$this->smarty()->display($file);
+	}
+
+	protected function fetch($file)
+	{
+		return $this->smarty()->fetch($file);
 	}
 
 	/**

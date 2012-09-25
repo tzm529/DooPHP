@@ -8,9 +8,12 @@
 class MainController extends DooController{
 
     public function index(){
+		//test smarty
+		$this->assign("test", "test_value");
+		$this->display("smarty_test.html");
 		//Just replace these
-		Doo::loadCore('app/DooSiteMagic');
-		DooSiteMagic::displayHome();
+		/*Doo::loadCore('app/DooSiteMagic');
+		DooSiteMagic::displayHome();*/
     }
 	
 	public function allurl(){	
