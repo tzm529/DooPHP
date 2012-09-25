@@ -403,6 +403,12 @@ class DooView {
         //--------------------------- Parsing -----------------------------
         //if no compiled file exist or compiled file is older, generate new one
         $str = $this->compileTags(file_get_contents($vfilename));
+		  if(empty($str)){
+				if(is_file($vfilename))
+					$str = "";
+				else
+					$str = false;
+		  }
 
 		Doo::loadHelper('DooFile');
 		$fileManager = new DooFile(0777);

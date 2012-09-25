@@ -90,7 +90,8 @@ class DooFile {
 	 */
 	public function create($path, $content=null, $writeFileMode='w+') {
         //create file if content not empty
-		if (!empty($content)) {
+		//if (!empty($content)) {
+		if ($content !== false) {
             if(strpos($path, '/')!==false || strpos($path, '\\')!==false){
                 $path = str_replace('\\', '/', $path);
                 $filename = $path;
