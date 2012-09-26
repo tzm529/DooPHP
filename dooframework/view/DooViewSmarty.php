@@ -26,7 +26,7 @@ class DooViewSmarty extends Smarty
 				$this->assign($k, $v);
 			}
 		}
-		$this->display($file);
+		$this->display($file . '.html');
 	}
 
 	public function renderc($file, $data, $_1 = '', $_2 = '')
